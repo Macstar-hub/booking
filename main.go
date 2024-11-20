@@ -46,7 +46,7 @@ func makeSlice(firstName string, lastName string) []string {
 	return bookingSlice
 }
 
-func availableTickets(totalTickets int, ticketNumber int) int {
+func availableTickets(ticketNumber int) int {
 	var confCapacity []int
 	totalAvailableTickets := append(confCapacity, totalTicket)
 	totalTicket = totalAvailableTickets[len(totalAvailableTickets)-1] - ticketNumber
@@ -59,6 +59,6 @@ func main() {
 		userHandeler(firstName, lastName, email, ticketNumber)
 		fmt.Printf("All booking users with arrays: %v \n", makeArray(firstName, lastName))
 		fmt.Printf("All booking users with slices: %v \n", makeSlice(firstName, lastName))
-		fmt.Printf("Total remaining tickets are %v \n", availableTickets(totalTicket, ticketNumber))
+		fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
 	}
 }
