@@ -4,25 +4,25 @@ import (
 	"fmt"
 )
 
-const totalTickets int = 50
+var totalTicket int = 50
 
 var confrenceName string = "Go-lang"
-var remainingTickets int = 50
 var firstName string
 var lastName string
 var email string
 var ticketNumber int
-var allAvailableTickets int
+var remainingTickets int
+
+// var allAvailableTickets int
 
 func inputUserInfo() (string, string, string, int) {
-	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
 	fmt.Println("Please Enter Your First Name: ")
 	fmt.Scan(&firstName)
 	fmt.Println("Please Enter Your Last Name: ")
 	fmt.Scan(&lastName)
 	fmt.Println("Please Enter Your Email: ")
 	fmt.Scan(&email)
-	fmt.Println("Please Enter Your Tickets For Bokking: ")
+	fmt.Println("Please Enter Your Tickets For Booking: ")
 	fmt.Scan(&ticketNumber)
 
 	return firstName, lastName, email, ticketNumber
@@ -40,15 +40,25 @@ func makeArray(firstName string, lastName string) []string {
 	return booking
 }
 
-func availableTickets(remainingTickets int, ticketNumber int) int {
-	allAvailableTickets = remainingTickets - ticketNumber
-	return allAvailableTickets
+func makeSlice(firstName string, lastName string) []string {
+	var booking []string
+	bookingSlice := append(booking, firstName+" "+lastName)
+	return bookingSlice
+}
+
+func availableTickets(totalTickets int, ticketNumber int) int {
+	var confCapacity []int
+	totalAvailableTickets := append(confCapacity, totalTicket)
+	totalTicket = totalAvailableTickets[len(totalAvailableTickets)-1] - ticketNumber
+	return totalTicket
 }
 
 func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
-	userHandeler(firstName, lastName, email, ticketNumber)
-	fmt.Printf("All booking users: %v \n", makeArray(firstName, lastName))
-	fmt.Printf("Total remaining tickets are %v \n", availableTickets(remainingTickets, ticketNumber))
-
+	for {
+		userHandeler(firstName, lastName, email, ticketNumber)
+		fmt.Printf("All booking users with arrays: %v \n", makeArray(firstName, lastName))
+		fmt.Printf("All booking users with slices: %v \n", makeSlice(firstName, lastName))
+		fmt.Printf("Total remaining tickets are %v \n", availableTickets(totalTicket, ticketNumber))
+	}
 }
