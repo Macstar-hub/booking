@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 var totalTicket int = 50
@@ -43,6 +44,13 @@ func makeArray(firstName string, lastName string) []string {
 func makeSlice(firstName string, lastName string) []string {
 	var booking []string
 	bookingSlice := append(booking, firstName+" "+lastName)
+
+	var firstNames []string
+	for _, bookingFirstName := range booking {
+		var name = strings.Fields(bookingFirstName)
+		firstNames = append(firstNames, name[0])
+		fmt.Printf("Just FirstNames Are: %v", firstNames) // this issue to show in cmd resualt
+	}
 	return bookingSlice
 }
 
@@ -60,5 +68,6 @@ func main() {
 		fmt.Printf("All booking users with arrays: %v \n", makeArray(firstName, lastName))
 		fmt.Printf("All booking users with slices: %v \n", makeSlice(firstName, lastName))
 		fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
+
 	}
 }
