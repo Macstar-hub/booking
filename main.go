@@ -6,7 +6,8 @@ import (
 )
 
 var totalTicket int = 50
-
+var bookingSlice []string
+var booking []string
 var confrenceName string = "Go-lang"
 var firstName string
 var lastName string
@@ -42,16 +43,20 @@ func makeArray(firstName string, lastName string) []string {
 }
 
 func makeSlice(firstName string, lastName string) []string {
-	var booking []string
 	bookingSlice := append(booking, firstName+" "+lastName)
 
+	return bookingSlice
+}
+
+func firstNames(bookingSlice []string) []string {
+	var booking = makeSlice(firstName, lastName)
 	var firstNames []string
 	for _, bookingFirstName := range booking {
 		var name = strings.Fields(bookingFirstName)
 		firstNames = append(firstNames, name[0])
-		fmt.Printf("Just FirstNames Are: %v", firstNames) // this issue to show in cmd resualt
 	}
-	return bookingSlice
+
+	return firstNames
 }
 
 func availableTickets(ticketNumber int) int {
@@ -61,13 +66,18 @@ func availableTickets(ticketNumber int) int {
 	return totalTicket
 }
 
-func main() {
+func main2() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
+
 	for {
 		userHandeler(firstName, lastName, email, ticketNumber)
+		bookingSlice := append(booking, firstName+" "+lastName)
+
 		fmt.Printf("All booking users with arrays: %v \n", makeArray(firstName, lastName))
-		fmt.Printf("All booking users with slices: %v \n", makeSlice(firstName, lastName))
+		fmt.Println("======================================================================================================")
+		fmt.Printf("All booking users with all booking slices: %v \n", bookingSlice)
 		fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
+		// fmt.Printf("All first name are: %v \n", firstNames(allbooking))
 
 	}
 }
