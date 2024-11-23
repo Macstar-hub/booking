@@ -9,7 +9,6 @@ var lastName string
 var bookingSlice []string
 
 func main() {
-
 	for {
 		fmt.Println("Please Enter Your First Name: ")
 		fmt.Scan(&firstName)
