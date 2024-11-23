@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 var slices []string
+var word string
 var firstNamess string
 var lastNamess string
 
