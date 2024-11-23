@@ -1,23 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-var slices []string
-var word string
-var firstNamess string
-var lastNamess string
-
-func sliced(firstNamess string, lastNamess string) []string {
-	slices = append(slices, firstNamess+" "+lastNamess+",")
-	return slices
-}
+var firstName string
+var lastName string
+var bookingSlice []string
 
 func main() {
 
 	for {
-		fmt.Println("Enter words: ")
-		fmt.Scan(&firstNamess)
-		fmt.Scan(&lastNamess)
-		fmt.Println(sliced(firstNamess, lastNamess))
+		fmt.Println("Please Enter Your First Name: ")
+		fmt.Scan(&firstName)
+		fmt.Println("Please Enter Your Last Name: ")
+		fmt.Scan(&lastName)
+		bookingSlice := append(bookingSlice, firstName+" "+lastName)
+		fmt.Println(bookingSlice)
+
 	}
 }
