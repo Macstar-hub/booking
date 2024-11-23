@@ -1,12 +1,15 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-var firstName string
-var lastName string
-var bookingSlice []string
+var slices []string
+var firstNamess string
+var lastNamess string
+
+func sliced(firstNamess string, lastNamess string) []string {
+	slices = append(slices, firstNamess+" "+lastNamess+",")
+	return slices
+}
 
 func main() {
 	for {
