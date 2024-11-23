@@ -6,19 +6,18 @@ var slices []string
 var firstNamess string
 var lastNamess string
 
-func sliced(firstNamess string, lastNamess string) []string {
-	slices = append(slices, firstNamess+" "+lastNamess+",")
+func makeSlicesd(firstNamess string, lastNamess string) []string {
+	slices = append(slices, firstNamess+" "+lastNamess)
 	return slices
 }
 
-func main() {
+func main2() {
 	for {
 		fmt.Println("Please Enter Your First Name: ")
-		fmt.Scan(&firstName)
+		fmt.Scan(&firstNamess)
 		fmt.Println("Please Enter Your Last Name: ")
-		fmt.Scan(&lastName)
-		bookingSlice := append(bookingSlice, firstName+" "+lastName)
-		fmt.Println(bookingSlice)
+		fmt.Scan(&lastNamess)
+		fmt.Println(makeSlicesd(firstNamess, lastNamess))
 
 	}
 }

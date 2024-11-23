@@ -6,14 +6,14 @@ import (
 )
 
 var totalTicket int = 50
-var bookingSlice []string
 var booking []string
 var confrenceName string = "Go-lang"
-var firstName string
-var lastName string
 var email string
 var ticketNumber int
 var remainingTickets int
+var firstName string
+var lastName string
+var slicess []string
 
 // var allAvailableTickets int
 
@@ -43,16 +43,17 @@ func makeArray(firstName string, lastName string) []string {
 }
 
 func makeSlice(firstName string, lastName string) []string {
-	bookingSlice := append(bookingSlice, firstName+" "+lastName)
-
-	return bookingSlice
+	slicess = append(slicess, firstName+" "+lastName)
+	return slicess
 }
 
-func firstNames(bookingSlice []string) []string {
+func firstNames(firstName string, lastName string) []string {
 	var booking = makeSlice(firstName, lastName)
 	var firstNames []string
-	for _, bookingFirstName := range booking {
+	for index, bookingFirstName := range booking {
+		fmt.Println("index is: ", index)
 		var name = strings.Fields(bookingFirstName)
+		fmt.Println("name list are: ", index, name[0])
 		firstNames = append(firstNames, name[0])
 	}
 
@@ -66,18 +67,14 @@ func availableTickets(ticketNumber int) int {
 	return totalTicket
 }
 
-func main2() {
+func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
 
 	for {
 		userHandeler(firstName, lastName, email, ticketNumber)
-		bookingSlice := append(booking, firstName+" "+lastName)
-
-		fmt.Printf("All booking users with arrays: %v \n", makeArray(firstName, lastName))
-		fmt.Println("======================================================================================================")
-		fmt.Printf("All booking users with all booking slices: %v \n", bookingSlice)
+		fmt.Printf("All User Slices Are:  %v \n", makeSlice(firstName, lastName))
 		fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
-		// fmt.Printf("All first name are: %v \n", firstNames(allbooking))
+		fmt.Printf("All firstname are: %v \n", firstNames(firstName, lastName))
 
 	}
 }
