@@ -12,7 +12,6 @@ func sliced(firstNamess string, lastNamess string) []string {
 }
 
 func main() {
-
 	for {
 		fmt.Println("Enter words: ")
 		fmt.Scan(&firstNamess)
