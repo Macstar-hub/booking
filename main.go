@@ -43,7 +43,7 @@ func makeArray(firstName string, lastName string) []string {
 }
 
 func makeSlice(firstName string, lastName string) []string {
-	bookingSlice := append(booking, firstName+" "+lastName)
+	bookingSlice := append(bookingSlice, firstName+" "+lastName)
 
 	return bookingSlice
 }
