@@ -14,6 +14,8 @@ var remainingTickets int
 var firstName string
 var lastName string
 var slicess []string
+var allFirstName []string
+var names string
 
 // var allAvailableTickets int
 
@@ -42,22 +44,25 @@ func makeArray(firstName string, lastName string) []string {
 	return booking
 }
 
-func makeSlice(firstName string, lastName string) []string {
-	slicess = append(slicess, firstName+" "+lastName)
-	return slicess
-}
+// func makeSlice(firstName string, lastName string) []string {
+// 	slicess = append(slicess, firstName+" "+lastName)
+// 	var testFirstNamed []string
+// 	for _, firstNameSlices := range slicess {
+// 		names = strings.Fields(firstNameSlices)[0]
+// 		allFirstName = append(testFirstNamed, names)
+// 		fmt.Println("All Firstname Are: ", allFirstName)
+// 	}
+// 	return slicess
+// }
 
-func firstNames(firstName string, lastName string) []string {
-	var booking = makeSlice(firstName, lastName)
-	var firstNames []string
-	for index, bookingFirstName := range booking {
-		fmt.Println("index is: ", index)
-		var name = strings.Fields(bookingFirstName)
-		fmt.Println("name list are: ", index, name[0])
-		firstNames = append(firstNames, name[0])
+func makeSlicesd(firstNamess string, lastNamess string) ([]string, []string) {
+	var testFirstName []string
+	slicess = append(slicess, firstNamess+" "+lastNamess)
+	for _, firstNameSlice := range slicess {
+		names = strings.Fields(firstNameSlice)[0]
+		testFirstName = append(testFirstName, names)
 	}
-
-	return firstNames
+	return slicess, testFirstName
 }
 
 func availableTickets(ticketNumber int) int {
@@ -72,9 +77,9 @@ func main() {
 
 	for {
 		userHandeler(firstName, lastName, email, ticketNumber)
-		fmt.Printf("All User Slices Are:  %v \n", makeSlice(firstName, lastName))
+		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
+		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
 		fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
-		fmt.Printf("All firstname are: %v \n", firstNames(firstName, lastName))
 
 	}
 }
