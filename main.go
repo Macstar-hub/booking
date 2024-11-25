@@ -44,17 +44,6 @@ func makeArray(firstName string, lastName string) []string {
 	return booking
 }
 
-// func makeSlice(firstName string, lastName string) []string {
-// 	slicess = append(slicess, firstName+" "+lastName)
-// 	var testFirstNamed []string
-// 	for _, firstNameSlices := range slicess {
-// 		names = strings.Fields(firstNameSlices)[0]
-// 		allFirstName = append(testFirstNamed, names)
-// 		fmt.Println("All Firstname Are: ", allFirstName)
-// 	}
-// 	return slicess
-// }
-
 func makeSlicesd(firstNamess string, lastNamess string) ([]string, []string) {
 	var testFirstName []string
 	slicess = append(slicess, firstNamess+" "+lastNamess)
@@ -69,8 +58,19 @@ func availableTickets(ticketNumber int) int {
 	var confCapacity []int
 	totalAvailableTickets := append(confCapacity, totalTicket)
 	totalTicket = totalAvailableTickets[len(totalAvailableTickets)-1] - ticketNumber
+	fmt.Println("All total tickets: %v", totalTicket)
 	return totalTicket
 }
+
+// func remainingTicketsCheck(totalTicket int, remainingTickets int) int {
+// 	totalTicket = availableTickets(ticketNumber)
+// 	if totalTicket == 0 {
+// 		fmt.Println("All tickets booked and this operation can not complete.")
+// 	} else {
+// 		fmt.Println("Continunig ... ")
+// 	}
+// 	return
+// }
 
 func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
@@ -79,7 +79,17 @@ func main() {
 		userHandeler(firstName, lastName, email, ticketNumber)
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
-		fmt.Printf("Total remaining tickets ar %v \n", availableTickets(ticketNumber))
+		// fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
 
+		// Check Available Ticket Number.
+		remainingTickets = totalTicket - (ticketNumber + remainingTickets)
+		fmt.Printf("var remainingTickets: %v \n", remainingTickets)
+		var noTicketRemaning = remainingTickets <= 0
+		if noTicketRemaning {
+			fmt.Println("All tickets booked and this operation can not complete.")
+			break
+		} else {
+			fmt.Println("Continunig ... ")
+		}
 	}
 }
