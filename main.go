@@ -79,7 +79,7 @@ func main() {
 		userHandeler(firstName, lastName, email, ticketNumber)
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
-		fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
+		fmt.Printf("Total remaining tickets ar %v \n", availableTickets(ticketNumber))
 
 	}
 }
