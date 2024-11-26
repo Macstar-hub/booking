@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./printstring"
 	"fmt"
 	"strings"
 )
