@@ -74,16 +74,18 @@ func availableTickets(ticketNumber int) int {
 
 func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
+	var remainingTickets = 0
+	PritnString("Hello from main")
 
 	for {
+		fmt.Printf("var remainingTickets in first func: %v \n", remainingTickets)
 		userHandeler(firstName, lastName, email, ticketNumber)
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
-		// fmt.Printf("Total remaining tickets are %v \n", availableTickets(ticketNumber))
 
 		// Check Available Ticket Number.
 		remainingTickets = totalTicket - (ticketNumber + remainingTickets)
-		fmt.Printf("var remainingTickets: %v \n", remainingTickets)
+		fmt.Printf("var remainingTickets in end of func: %v \n", remainingTickets)
 		var noTicketRemaning = remainingTickets <= 0
 		if noTicketRemaning {
 			fmt.Println("All tickets booked and this operation can not complete.")
