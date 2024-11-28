@@ -1,22 +1,23 @@
 package main
 
 import (
-	"./printstring"
+	"booking/remainingtickets"
 	"fmt"
 	"strings"
 )
 
 var totalTicket int = 50
+var remainingTickets int = 50
 var booking []string
 var confrenceName string = "Go-lang"
 var email string
 var ticketNumber int
-var remainingTickets int
 var firstName string
 var lastName string
 var slicess []string
 var allFirstName []string
 var names string
+var reservedTicket int
 
 // var allAvailableTickets int
 
@@ -55,44 +56,22 @@ func makeSlicesd(firstNamess string, lastNamess string) ([]string, []string) {
 	return slicess, testFirstName
 }
 
-func availableTickets(ticketNumber int) int {
-	var confCapacity []int
-	totalAvailableTickets := append(confCapacity, totalTicket)
-	totalTicket = totalAvailableTickets[len(totalAvailableTickets)-1] - ticketNumber
-	fmt.Println("All total tickets: %v", totalTicket)
-	return totalTicket
-}
-
-// func remainingTicketsCheck(totalTicket int, remainingTickets int) int {
-// 	totalTicket = availableTickets(ticketNumber)
-// 	if totalTicket == 0 {
-// 		fmt.Println("All tickets booked and this operation can not complete.")
-// 	} else {
-// 		fmt.Println("Continunig ... ")
-// 	}
-// 	return
-// }
-
 func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
-	var remainingTickets = 0
-	PritnString("Hello from main")
 
 	for {
 		fmt.Printf("var remainingTickets in first func: %v \n", remainingTickets)
 		userHandeler(firstName, lastName, email, ticketNumber)
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
+		remainingTickets = remainingtickets.AvailableTickets(remainingTickets, ticketNumber)
 
-		// Check Available Ticket Number.
-		remainingTickets = totalTicket - (ticketNumber + remainingTickets)
-		fmt.Printf("var remainingTickets in end of func: %v \n", remainingTickets)
-		var noTicketRemaning = remainingTickets <= 0
-		if noTicketRemaning {
-			fmt.Println("All tickets booked and this operation can not complete.")
+		notEnoughTickets := remainingTickets <= 0
+		if notEnoughTickets {
+			fmt.Printf("All Ticket Remaining: %v \n", remainingTickets)
 			break
 		} else {
-			fmt.Println("Continunig ... ")
+			fmt.Println("You Can Continue with total remaning tickets: %v \n", remainingTickets)
 		}
 	}
 }
