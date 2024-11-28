@@ -1,7 +1,7 @@
 package main
 
 import (
-	"booking/remainingtickets"
+	"booking/cmd/remainingtickets"
 	"fmt"
 	"strings"
 )
