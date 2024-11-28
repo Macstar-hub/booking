@@ -35,15 +35,8 @@ func inputUserInfo() (string, string, string, int) {
 }
 
 func userHandeler(firstName string, lastName string, email string, ticketNumber int) (string, string, string, int) {
-	userFirstName, userLastName, userEmail, userTicketNumber := inputUserInfo()
-	fmt.Printf("User %v %v with email %v booked %v tickets \n", userFirstName, userLastName, userEmail, userTicketNumber)
+	inputUserInfo()
 	return firstName, lastName, email, ticketNumber
-}
-
-func makeArray(firstName string, lastName string) []string {
-	booking := make([]string, 1)
-	booking[0] = firstName + " " + lastName
-	return booking
 }
 
 func makeSlicesd(firstNamess string, lastNamess string) ([]string, []string) {
@@ -56,22 +49,48 @@ func makeSlicesd(firstNamess string, lastNamess string) ([]string, []string) {
 	return slicess, testFirstName
 }
 
+func userInputValidations(firstName string, lastName string, email string, ticketNumber int) (bool, bool, bool) {
+	var isNameValid bool = len(firstName) > 4 && len(lastName) >= 4
+	var isMailValid bool = strings.Contains(email, "@")
+	var isTicketNumberValid bool = ticketNumber <= remainingTickets
+
+	return isNameValid, isMailValid, isTicketNumberValid
+}
+
 func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
 
 	for {
-		fmt.Printf("var remainingTickets in first func: %v \n", remainingTickets)
 		userHandeler(firstName, lastName, email, ticketNumber)
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
-		remainingTickets = remainingtickets.AvailableTickets(remainingTickets, ticketNumber)
 
-		notEnoughTickets := remainingTickets <= 0
-		if notEnoughTickets {
-			fmt.Printf("All Ticket Remaining: %v \n", remainingTickets)
-			break
+		// Add user input validation
+		isNameValid, isMailValid, isTicketNumberValid := userInputValidations(firstName, lastName, email, ticketNumber)
+		if isNameValid && isMailValid && isTicketNumberValid {
+			remainingTickets = remainingtickets.AvailableTickets(remainingTickets, ticketNumber)
+			notEnoughTickets := remainingTickets <= 0
+			if notEnoughTickets {
+				fmt.Printf("Booking Failed With Ticket Remaining: %v \n", remainingTickets)
+				break
+			} else {
+				fmt.Printf("User %v %v With Email %v Booked Successfuly %v Tickets \n", firstName, lastName, email, ticketNumber)
+			}
+
+			// Make user feedback guid
 		} else {
-			fmt.Println("You Can Continue with total remaning tickets: %v \n", remainingTickets)
+			if !isNameValid {
+				fmt.Println("Please Enter Correct FirstName And LastName ... ")
+				break
+			}
+			if !isNameValid {
+				fmt.Println("Please Enter Correct Email Address ... ")
+				break
+			}
+			if !isTicketNumberValid {
+				fmt.Printf("Please Select Ticket Number In Range Remaining Tickets: %v \n", remainingTickets)
+				break
+			}
 		}
 	}
 }
