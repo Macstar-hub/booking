@@ -2,6 +2,7 @@ package main
 
 import (
 	"booking/cmd/remainingtickets"
+	"booking/cmd/userhandaler"
 	"fmt"
 	"strings"
 )
@@ -18,26 +19,6 @@ var slicess []string
 var allFirstName []string
 var names string
 var reservedTicket int
-
-// var allAvailableTickets int
-
-func inputUserInfo() (string, string, string, int) {
-	fmt.Println("Please Enter Your First Name: ")
-	fmt.Scan(&firstName)
-	fmt.Println("Please Enter Your Last Name: ")
-	fmt.Scan(&lastName)
-	fmt.Println("Please Enter Your Email: ")
-	fmt.Scan(&email)
-	fmt.Println("Please Enter Your Tickets For Booking: ")
-	fmt.Scan(&ticketNumber)
-
-	return firstName, lastName, email, ticketNumber
-}
-
-func userHandeler(firstName string, lastName string, email string, ticketNumber int) (string, string, string, int) {
-	inputUserInfo()
-	return firstName, lastName, email, ticketNumber
-}
 
 func makeSlicesd(firstNamess string, lastNamess string) ([]string, []string) {
 	var testFirstName []string
@@ -61,7 +42,7 @@ func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
 
 	for {
-		userHandeler(firstName, lastName, email, ticketNumber)
+		firstName, lastName, email, ticketNumber = userhandaler.UserHandeler(firstName, lastName, email, ticketNumber)
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
 
