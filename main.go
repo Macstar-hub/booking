@@ -4,6 +4,7 @@ import (
 	"booking/cmd/remainingtickets"
 	"booking/cmd/userhandaler"
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -12,6 +13,7 @@ var remainingTickets int = 50
 var booking []string
 var confrenceName string = "Go-lang"
 var email string
+
 var ticketNumber int
 var firstName string
 var lastName string
@@ -40,9 +42,11 @@ func userInputValidations(firstName string, lastName string, email string, ticke
 
 func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
+	var ticketNumberSting string
 
 	for {
-		firstName, lastName, email, ticketNumber = userhandaler.UserHandeler(firstName, lastName, email, ticketNumber)
+		firstName, lastName, email, ticketNumberSting = userhandaler.UserHandeler(firstName, lastName, email, ticketNumber)
+		ticketNumber, _ = strconv.Atoi(ticketNumberSting)
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
 
