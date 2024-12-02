@@ -7,20 +7,14 @@ import (
 	"strings"
 )
 
-var totalTicket int = 50
 var remainingTickets int = 50
-var booking = make([]map[string]string, 0)
 var confrenceName string = "Go-lang"
 var email string
-
 var ticketNumber int
 var firstName string
 var lastName string
 var slicess []string
-var allFirstName []string
 var names string
-var reservedTicket int
-var bookingMap map[string]string
 
 func makeSlicesd(firstNamess string, lastNamess string, email string, ticketNumber int) ([]string, []string) {
 	var testFirstName []string
@@ -41,13 +35,12 @@ func userInputValidations(firstName string, lastName string, email string, ticke
 }
 
 func main() {
-	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
+	fmt.Printf("Welcome to %v confrence with available tickets: %v \n", confrenceName, remainingTickets)
 
 	for {
 		// Force to user struct function.
 		userData := userhandaler.UserHandelerStruct(firstName, lastName, email, ticketNumber)
 		firstName, lastName, email, ticketNumber = userData.FirstName, userData.LastName, userData.Email, userData.TicketNumber
-		fmt.Println("Debug: inside main -> for.")
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName, email, ticketNumber)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
 
