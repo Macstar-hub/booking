@@ -52,6 +52,12 @@ func main() {
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName, email, ticketNumber)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
 
+		// Add Debug From Structure
+		fmt.Println("Debug: How can i do this struct ")
+		userData := userhandaler.UserHandelerStruct(firstName, lastName, email, ticketNumber)
+		fmt.Println("Debug: inside main func for firstName check: ", userData.FirstName)
+		// fmt.Println(userhandaler.UserHandelerStruct())
+
 		// Add user input validation
 		isNameValid, isMailValid, isTicketNumberValid := userInputValidations(firstName, lastName, email, ticketNumber)
 		if isNameValid && isMailValid && isTicketNumberValid {

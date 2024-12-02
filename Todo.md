@@ -2,7 +2,7 @@
 * Issues: 
     - [x] Solving duplication in slices 
     - [x] For Example "makeSlices" return:  [Mehran Moradi Mehran Moradi Mehrdad Moradi].
-    - [ ] Change userHandelet old function with new userHandeler function and fix makeSlice func with new return userHandeler return as map variabls. (From 2:48:30 Nana tutorial)
+    - [x] Change userHandeler old function with new userHandeler function and fix makeSlice func with new return userHandeler return as map variabls. (From 2:48:30 Nana tutorial)
     
 ---
 

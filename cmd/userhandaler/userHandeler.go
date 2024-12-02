@@ -18,6 +18,13 @@ var allFirstName []string
 var names string
 var reservedTicket int
 
+type userData struct {
+	FirstName    string
+	LastName     string
+	Email        string
+	TicketNumber int
+}
+
 // User Info Catchup logic
 func InputUserInfo() (string, string, string, int) {
 	fmt.Println("Please Enter Your First Name: ")
@@ -56,4 +63,17 @@ func UserHandelerMap(firstName string, lastName string, email string, ticketNumb
 	userInputMap["ticketNumber"] = strconv.Itoa(ticketNumber)
 
 	return userInputMap
+}
+
+func UserHandelerStruct(firstName string, lastName string, email string, ticketNumber int) userData {
+	// Make map from user input:
+
+	var userInput = userData{
+		FirstName:    firstName,
+		LastName:     lastName,
+		Email:        email,
+		TicketNumber: ticketNumber,
+	}
+
+	return userInput
 }
