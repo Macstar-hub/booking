@@ -7,7 +7,7 @@ import (
 
 var totalTicket int = 50
 var remainingTickets int = 50
-var booking []string
+var booking = make([]map[string]string, 0)
 var confrenceName string = "Go-lang"
 var email string
 var ticketNumber int
@@ -35,9 +35,7 @@ func InputUserInfo() (string, string, string, int) {
 // User Handeler Info Logic .
 
 func UserHandeler(firstName string, lastName string, email string, ticketNumber int) (string, string, string, string) {
-	// firstName, lastName, email, ticketNumber = InputUserInfo()
-	// fmt.Println("Print with simpel withuot map", firstName, lastName, email, ticketNumber)
-
+	firstName, lastName, email, ticketNumber = InputUserInfo()
 	// Make map from user input:
 	var userInputMap = make(map[string]string)
 	userInputMap["firstName"] = firstName
@@ -45,8 +43,17 @@ func UserHandeler(firstName string, lastName string, email string, ticketNumber 
 	userInputMap["email"] = email
 	userInputMap["ticketNumber"] = strconv.Itoa(ticketNumber)
 
-	fmt.Println("Print form map value: ", userInputMap["firstName"], userInputMap["lastName"], userInputMap["email"], userInputMap["ticketNumber"])
-
 	// return firstName, lastName, email, ticketNumber
 	return userInputMap["firstName"], userInputMap["lastName"], userInputMap["email"], userInputMap["ticketNumber"]
+}
+
+func UserHandelerMap(firstName string, lastName string, email string, ticketNumber int) map[string]string {
+	// Make map from user input:
+	var userInputMap = make(map[string]string)
+	userInputMap["firstName"] = firstName
+	userInputMap["lastName"] = lastName
+	userInputMap["email"] = email
+	userInputMap["ticketNumber"] = strconv.Itoa(ticketNumber)
+
+	return userInputMap
 }

@@ -10,7 +10,7 @@ import (
 
 var totalTicket int = 50
 var remainingTickets int = 50
-var booking []string
+var booking = make([]map[string]string, 0)
 var confrenceName string = "Go-lang"
 var email string
 
@@ -21,10 +21,12 @@ var slicess []string
 var allFirstName []string
 var names string
 var reservedTicket int
+var bookingMap map[string]string
 
-func makeSlicesd(firstNamess string, lastNamess string) ([]string, []string) {
+func makeSlicesd(firstNamess string, lastNamess string, email string, ticketNumber int) ([]string, []string) {
 	var testFirstName []string
-	slicess = append(slicess, firstNamess+" "+lastNamess)
+	bookingMap = userhandaler.UserHandelerMap(firstNamess, lastNamess, email, ticketNumber)
+	slicess = append(slicess, bookingMap["firstName"]+" "+bookingMap["lastName"])
 	for _, firstNameSlice := range slicess {
 		names = strings.Fields(firstNameSlice)[0]
 		testFirstName = append(testFirstName, names)
@@ -47,7 +49,7 @@ func main() {
 	for {
 		firstName, lastName, email, ticketNumberSting = userhandaler.UserHandeler(firstName, lastName, email, ticketNumber)
 		ticketNumber, _ = strconv.Atoi(ticketNumberSting)
-		allUsers, allFirsnames := makeSlicesd(firstName, lastName)
+		allUsers, allFirsnames := makeSlicesd(firstName, lastName, email, ticketNumber)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
 
 		// Add user input validation
@@ -66,9 +68,10 @@ func main() {
 		} else {
 			if !isNameValid {
 				fmt.Println("Please Enter Correct FirstName And LastName ... ")
+				fmt.Printf("FisrtName that enterd: %v And lastName that enterd: %v", firstName, lastName)
 				break
 			}
-			if !isNameValid {
+			if !isMailValid {
 				fmt.Println("Please Enter Correct Email Address ... ")
 				break
 			}
