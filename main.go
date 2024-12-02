@@ -3,6 +3,7 @@ package main
 import (
 	"booking/cmd/remainingtickets"
 	"booking/cmd/userhandaler"
+	mysqlconnector "booking/internal/mysql"
 	"fmt"
 	"strings"
 )
@@ -48,6 +49,7 @@ func main() {
 		isNameValid, isMailValid, isTicketNumberValid := userInputValidations(firstName, lastName, email, ticketNumber)
 		if isNameValid && isMailValid && isTicketNumberValid {
 			remainingTickets = remainingtickets.AvailableTickets(remainingTickets, ticketNumber)
+			mysqlconnector.Insert(firstName, lastName, email, ticketNumber)
 			notEnoughTickets := remainingTickets <= 0
 			if notEnoughTickets {
 				fmt.Printf("Booking Failed With Ticket Remaining: %v \n", remainingTickets)
