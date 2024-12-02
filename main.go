@@ -4,7 +4,6 @@ import (
 	"booking/cmd/remainingtickets"
 	"booking/cmd/userhandaler"
 	"fmt"
-	"strconv"
 	"strings"
 )
 
@@ -25,8 +24,7 @@ var bookingMap map[string]string
 
 func makeSlicesd(firstNamess string, lastNamess string, email string, ticketNumber int) ([]string, []string) {
 	var testFirstName []string
-	bookingMap = userhandaler.UserHandelerMap(firstNamess, lastNamess, email, ticketNumber)
-	slicess = append(slicess, bookingMap["firstName"]+" "+bookingMap["lastName"])
+	slicess = append(slicess, firstNamess+" "+lastNamess)
 	for _, firstNameSlice := range slicess {
 		names = strings.Fields(firstNameSlice)[0]
 		testFirstName = append(testFirstName, names)
@@ -44,19 +42,14 @@ func userInputValidations(firstName string, lastName string, email string, ticke
 
 func main() {
 	fmt.Printf("Welcome to %v with available tickets: %v \n", confrenceName, remainingTickets)
-	var ticketNumberSting string
 
 	for {
-		firstName, lastName, email, ticketNumberSting = userhandaler.UserHandeler(firstName, lastName, email, ticketNumber)
-		ticketNumber, _ = strconv.Atoi(ticketNumberSting)
+		// Force to user struct function.
+		userData := userhandaler.UserHandelerStruct(firstName, lastName, email, ticketNumber)
+		firstName, lastName, email, ticketNumber = userData.FirstName, userData.LastName, userData.Email, userData.TicketNumber
+		fmt.Println("Debug: inside main -> for.")
 		allUsers, allFirsnames := makeSlicesd(firstName, lastName, email, ticketNumber)
 		fmt.Printf("All users are: %v And all just firstnames: %v\n", allUsers, allFirsnames)
-
-		// Add Debug From Structure
-		fmt.Println("Debug: How can i do this struct ")
-		userData := userhandaler.UserHandelerStruct(firstName, lastName, email, ticketNumber)
-		fmt.Println("Debug: inside main func for firstName check: ", userData.FirstName)
-		// fmt.Println(userhandaler.UserHandelerStruct())
 
 		// Add user input validation
 		isNameValid, isMailValid, isTicketNumberValid := userInputValidations(firstName, lastName, email, ticketNumber)

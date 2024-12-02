@@ -67,6 +67,7 @@ func UserHandelerMap(firstName string, lastName string, email string, ticketNumb
 
 func UserHandelerStruct(firstName string, lastName string, email string, ticketNumber int) userData {
 	// Make map from user input:
+	firstName, lastName, email, ticketNumber = InputUserInfo()
 
 	var userInput = userData{
 		FirstName:    firstName,
