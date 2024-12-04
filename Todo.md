@@ -8,6 +8,7 @@
         - [x] Make insert function. 
         - [x] Make select function. 
     - [x] Use mysql ticket with mysql internal function.
+    - [ ] Making rabbitmq connection and module.
     - [ ] Make userValidation Function and sperate them to cmd directory . 
     - [ ] cleanup main.go file . 
     - [ ] make build directory .
