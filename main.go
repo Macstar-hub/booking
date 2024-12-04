@@ -36,7 +36,7 @@ func userInputValidations(firstName string, lastName string, email string, ticke
 }
 
 func main() {
-	fmt.Printf("Welcome to %v confrence with available tickets: %v \n", confrenceName, remainingTickets)
+	fmt.Printf("Welcome to %v confrence with available tickets: %v \n", confrenceName, remainingtickets.AvailableTickets(remainingTickets, ticketNumber))
 
 	for {
 		// Force to user struct function.

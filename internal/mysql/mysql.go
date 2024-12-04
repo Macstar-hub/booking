@@ -11,7 +11,7 @@ import (
 
 var TableName = "users"
 
-type Tag struct {
+type Tabelinfo struct {
 	FirstName    string `json:"firsname"`
 	Lastname     string `json:"lastname"`
 	Email        string `json:"email"`
@@ -50,27 +50,13 @@ func MakeConnectionToDB() *sql.DB {
 
 func Insert(firstName string, lastName string, email string, ticketNumber int) {
 
-	SqlConfig := SqlConfig{
-		Password:     "test@test",
-		UserName:     "root",
-		MysqlIP:      "127.0.0.1",
-		MysqlPort:    3306,
-		DatabaseName: "db",
-		TableName:    "users",
-	}
-
-	tableInfo := Tag{
+	tableInfo := Tabelinfo{
 		FirstName: `json:"firsname"`,
 		Lastname:  `json:"lastname"`,
 		Email:     `json:"email"`,
 		TableName: TableName,
 	}
-	connectioString := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v", SqlConfig.UserName, SqlConfig.Password, SqlConfig.MysqlIP, SqlConfig.MysqlPort, SqlConfig.DatabaseName)
-	db, err := sql.Open("mysql", connectioString)
-
-	if err != nil {
-		panic(err.Error())
-	}
+	db := MakeConnectionToDB()
 	defer db.Close()
 
 	var insertQuery = fmt.Sprintf("insert into %v(firsname, lastname, email, ticketnumber) values ('%v', '%v', '%v', %v)", tableInfo.TableName, firstName, lastName, email, ticketNumber)
@@ -89,7 +75,7 @@ func Insert(firstName string, lastName string, email string, ticketNumber int) {
 
 func SelectQury() {
 	db := MakeConnectionToDB()
-	selectQuery, err := db.Query("select * from users")
+	selectQuery, err := db.Query("select * from users") // For example: db.Query("select * from users")
 
 	if err != nil {
 		panic(err.Error())
@@ -98,7 +84,7 @@ func SelectQury() {
 	defer db.Close()
 
 	for selectQuery.Next() {
-		var tag Tag
+		var tag Tabelinfo
 
 		err = selectQuery.Scan(&tag.FirstName, &tag.Lastname, &tag.Email, &tag.TicketNumber)
 		if err != nil {
@@ -108,7 +94,3 @@ func SelectQury() {
 		defer db.Close()
 	}
 }
-
-// func main() {
-// 	SelectQury()
-// }
