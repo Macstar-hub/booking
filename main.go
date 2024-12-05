@@ -9,7 +9,7 @@ import (
 )
 
 var remainingTickets int = 50
-var confrenceName string = "Go-lang"
+var confrenceName string = "Go Lang"
 var email string
 var ticketNumber int
 var firstName string
