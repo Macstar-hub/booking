@@ -3,7 +3,6 @@ package main
 import (
 	"booking/cmd/remainingtickets"
 	"booking/cmd/userhandaler"
-	mysqlconnector "booking/internal/mysql"
 	"booking/internal/rabbitmq"
 	"fmt"
 	"strings"
@@ -52,13 +51,10 @@ func main() {
 			remainingTickets = remainingtickets.AvailableTickets(remainingTickets, ticketNumber)
 
 			// Produce test info to rabbitmq
-			rabbitmq.RabbitProducer(firstName + " " + lastName)
+			rabbitmq.RabbitProducer(firstName, lastName, email, ticketNumber)
 			go rabbitmq.RabbitConsumer()
 			//
 
-			// Add user info to database
-			mysqlconnector.Insert(firstName, lastName, email, ticketNumber)
-			//
 			notEnoughTickets := remainingTickets <= 0
 			if notEnoughTickets {
 				fmt.Printf("Booking Failed With Ticket Remaining: %v \n", remainingTickets)

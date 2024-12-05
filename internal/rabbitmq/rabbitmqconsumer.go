@@ -1,10 +1,14 @@
 package rabbitmq
 
 import (
+	mysqlconnector "booking/internal/mysql"
 	"fmt"
-	// "github.com/streadway/amqp"
 	"log"
+	"strconv"
+	"strings"
 )
+
+var userInfoSlices []string
 
 func RabbitConsumer() {
 
@@ -28,6 +32,16 @@ func RabbitConsumer() {
 	go func() {
 		for message := range messages {
 			fmt.Printf("Received message: %s \n", message.Body)
+			userInfos := string(message.Body[:])
+			userInfoSlices := append(userInfoSlices, userInfos)
+			for _, userInfo := range userInfoSlices {
+				firstName := strings.Fields(userInfo)[0]
+				lastName := strings.Fields(userInfo)[1]
+				email := strings.Fields(userInfo)[2]
+				ticketNumberString := strings.Fields(userInfo)[3]
+				ticketNumber, _ := strconv.Atoi(ticketNumberString)
+				mysqlconnector.Insert(firstName, lastName, email, ticketNumber)
+			}
 		}
 	}()
 

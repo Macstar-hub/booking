@@ -4,12 +4,29 @@ import (
 	"fmt"
 	"log"
 
+	"strconv"
+
 	"github.com/streadway/amqp"
 )
 
-func RabbitProducer(message string) *amqp.Channel {
+type Message struct {
+	FirstName    string
+	Lastname     string
+	Email        string
+	TicketNumber int
+}
+
+func RabbitProducer(firstName string, lastName string, email string, ticketNumber int) *amqp.Channel {
 
 	_, channel := InitRabbitConnection()
+
+	// message := Message{
+	// 	FirstName:    firstName,
+	// 	Lastname:     lastName,
+	// 	Email:        email,
+	// 	TicketNumber: ticketNumber,
+	// }
+	message := fmt.Sprintf(firstName + " " + lastName + " " + email + " " + strconv.Itoa(ticketNumber))
 
 	queue, err := channel.QueueDeclare(
 		"qurywrite", // queue name
