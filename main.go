@@ -4,6 +4,7 @@ import (
 	"booking/cmd/remainingtickets"
 	"booking/cmd/userhandaler"
 	mysqlconnector "booking/internal/mysql"
+	"booking/internal/rabbitmq"
 	"fmt"
 	"strings"
 )
@@ -49,7 +50,15 @@ func main() {
 		isNameValid, isMailValid, isTicketNumberValid := userInputValidations(firstName, lastName, email, ticketNumber)
 		if isNameValid && isMailValid && isTicketNumberValid {
 			remainingTickets = remainingtickets.AvailableTickets(remainingTickets, ticketNumber)
+
+			// Produce test info to rabbitmq
+			rabbitmq.RabbitProducer(firstName + " " + lastName)
+			go rabbitmq.RabbitConsumer()
+			//
+
+			// Add user info to database
 			mysqlconnector.Insert(firstName, lastName, email, ticketNumber)
+			//
 			notEnoughTickets := remainingTickets <= 0
 			if notEnoughTickets {
 				fmt.Printf("Booking Failed With Ticket Remaining: %v \n", remainingTickets)
