@@ -19,5 +19,5 @@
 ---
 
 * Issues: 
-    - [ ] First Solve Next Steps !
+    - [ ] Solve "Uncorrect showing cli comment #2".
 
