@@ -27,10 +27,6 @@ func AvailableTickets(remainingTickets int, ticketNumber int) int {
 			panic(err.Error())
 		}
 
-		//
-		// fmt.Println("Debug inside remaining ticket function: value ticket booked from database: ", tag.TicketNumber)
-		//
-
 		ticketNumber = tag.TicketNumber + ticketNumber
 		defer db.Close()
 	}

@@ -60,7 +60,6 @@ func Insert(firstName string, lastName string, email string, ticketNumber int) {
 	defer db.Close()
 
 	var insertQuery = fmt.Sprintf("insert into %v(firsname, lastname, email, ticketnumber) values ('%v', '%v', '%v', %v)", tableInfo.TableName, firstName, lastName, email, ticketNumber)
-	fmt.Println("Debug: from Insert func", insertQuery)
 	insert, err := db.Query(insertQuery)
 
 	if err != nil {
