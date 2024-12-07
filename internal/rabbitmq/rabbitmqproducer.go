@@ -20,13 +20,7 @@ func RabbitProducer(firstName string, lastName string, email string, ticketNumbe
 
 	_, channel := InitRabbitConnection()
 
-	// message := Message{
-	// 	FirstName:    firstName,
-	// 	Lastname:     lastName,
-	// 	Email:        email,
-	// 	TicketNumber: ticketNumber,
-	// }
-	message := fmt.Sprintf(firstName + " " + lastName + " " + email + " " + strconv.Itoa(ticketNumber))
+	message := fmt.Sprintf(firstName + " " + lastName + " " + email + " " + strconv.Itoa(ticketNumber)) // Get message as function input OR R&D on method in function.
 
 	queue, err := channel.QueueDeclare(
 		"qurywrite", // queue name

@@ -11,6 +11,8 @@
     - [X] Making rabbitmq connection and module.
         - [x] Making publish user info throw rabbitmq.
         - [x] Making consume and insert qury from rabbitmq.
+        - [ ] Making pre-check for remaining ticket number throw rabbitmq. 
+            - [ ] Make change in rabbitmq producer and consumer{1. seprate "message logic as input to func RabbitmqProducer and RabbitMQ Consumer."}
         - [ ] Making exchange and queue with code and bind queue with code to exchange.
     - [ ] Make http server to api server. 
     - [ ] Make userValidation Function and sperate them to cmd directory. 
