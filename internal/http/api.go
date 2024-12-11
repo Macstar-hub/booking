@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// test
 type userInfoTemplate struct {
 	firstName    string
 	lastName     string
