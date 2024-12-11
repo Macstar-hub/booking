@@ -1,0 +1,25 @@
+package main
+
+import (
+	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/gommon/log"
+)
+
+func main() {
+	server := echo.New()
+	server.Logger.SetLevel(log.DEBUG)
+	server.Debug = true
+
+	server.GET("/", func(c echo.Context) error {
+		server.Logger.SetLevel(log.DEBUG)
+		return c.String(http.StatusOK, "Hello world ... :)")
+	})
+
+	if log, ok := server.Logger.(*log.Logger); ok {
+		log.SetHeader("${time_rfc3339} ${level}")
+	}
+
+	server.Logger.Fatal(server.Start(":8080"))
+}
