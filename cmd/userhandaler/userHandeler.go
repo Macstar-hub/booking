@@ -75,11 +75,6 @@ func UserHandelerMap(firstName string, lastName string, email string, ticketNumb
 }
 
 func UserHandelerStruct(firstName string, lastName string, email string, ticketNumber int) userData {
-	// firstName, lastName, email, ticketNumber = InputUserInfo()
-	// firtnametest := firstName
-	// lastnametest := lastName
-	// emailtest := email
-	// ticketNumbertest := ticketNumber
 
 	var userInput = userData{
 		FirstName:    firstName,
