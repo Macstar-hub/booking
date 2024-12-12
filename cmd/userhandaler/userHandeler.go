@@ -3,6 +3,7 @@ package userhandaler
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 var totalTicket int = 50
@@ -44,7 +45,6 @@ func UserInputFromAPI(firstNameApi string, lastNameApi string, emailApi string, 
 	LastName := lastNameApi
 	Email := emailApi
 	TicketNumber := ticketNumberApi
-	fmt.Println("Debug: userhandeler, UserInputFromAPI, And All input: ", firstName, lastName, email, ticketNumber)
 	UserHandelerStruct(FirstName, LastName, Email, TicketNumber)
 }
 
@@ -76,18 +76,26 @@ func UserHandelerMap(firstName string, lastName string, email string, ticketNumb
 
 func UserHandelerStruct(firstName string, lastName string, email string, ticketNumber int) userData {
 	// firstName, lastName, email, ticketNumber = InputUserInfo()
-	fmt.Println("Debug: userhandeler, UserHandeler, And All input: ", firstName, lastName, email, ticketNumber)
-	firtnametest := firstName
-	lastnametest := lastName
-	emailtest := email
-	ticketNumbertest := ticketNumber
+	// firtnametest := firstName
+	// lastnametest := lastName
+	// emailtest := email
+	// ticketNumbertest := ticketNumber
 
 	var userInput = userData{
-		FirstName:    firtnametest,
-		LastName:     lastnametest,
-		Email:        emailtest,
-		TicketNumber: ticketNumbertest,
+		FirstName:    firstName,
+		LastName:     lastName,
+		Email:        email,
+		TicketNumber: ticketNumber,
 	}
-	fmt.Println("================", userInput.FirstName)
 	return userInput
+}
+
+func MakeSlicesd(firstNamess string, lastNamess string, email string, ticketNumber int) ([]string, []string) {
+	var testFirstName []string
+	slicess = append(slicess, firstNamess+" "+lastNamess)
+	for _, firstNameSlice := range slicess {
+		names = strings.Fields(firstNameSlice)[0]
+		testFirstName = append(testFirstName, names)
+	}
+	return slicess, testFirstName
 }
