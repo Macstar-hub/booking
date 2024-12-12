@@ -39,10 +39,19 @@ func InputUserInfo() (string, string, string, int) {
 	return firstName, lastName, email, ticketNumber
 }
 
+func UserInputFromAPI(firstNameApi string, lastNameApi string, emailApi string, ticketNumberApi int) {
+	FirstName := firstNameApi
+	LastName := lastNameApi
+	Email := emailApi
+	TicketNumber := ticketNumberApi
+	fmt.Println("Debug: userhandeler, UserInputFromAPI, And All input: ", firstName, lastName, email, ticketNumber)
+	UserHandelerStruct(FirstName, LastName, Email, TicketNumber)
+}
+
 // User Handeler Info Logic .
 
 func UserHandeler(firstName string, lastName string, email string, ticketNumber int) (string, string, string, string) {
-	firstName, lastName, email, ticketNumber = InputUserInfo()
+	// firstName, lastName, email, ticketNumber = InputUserInfo()
 	// Make map from user input:
 	var userInputMap = make(map[string]string)
 	userInputMap["firstName"] = firstName
@@ -66,15 +75,19 @@ func UserHandelerMap(firstName string, lastName string, email string, ticketNumb
 }
 
 func UserHandelerStruct(firstName string, lastName string, email string, ticketNumber int) userData {
-	// Make map from user input:
-	firstName, lastName, email, ticketNumber = InputUserInfo()
+	// firstName, lastName, email, ticketNumber = InputUserInfo()
+	fmt.Println("Debug: userhandeler, UserHandeler, And All input: ", firstName, lastName, email, ticketNumber)
+	firtnametest := firstName
+	lastnametest := lastName
+	emailtest := email
+	ticketNumbertest := ticketNumber
 
 	var userInput = userData{
-		FirstName:    firstName,
-		LastName:     lastName,
-		Email:        email,
-		TicketNumber: ticketNumber,
+		FirstName:    firtnametest,
+		LastName:     lastnametest,
+		Email:        emailtest,
+		TicketNumber: ticketNumbertest,
 	}
-
+	fmt.Println("================", userInput.FirstName)
 	return userInput
 }

@@ -3,9 +3,13 @@ package main
 import (
 	"booking/cmd/remainingtickets"
 	"booking/cmd/userhandaler"
+
+	httppost "booking/internal/http"
 	"booking/internal/rabbitmq"
 	"fmt"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 var remainingTickets int = 50
@@ -37,6 +41,9 @@ func userInputValidations(firstName string, lastName string, email string, ticke
 
 func main() {
 	fmt.Printf("Welcome to %v confrence with available tickets: %v \n", confrenceName, remainingtickets.AvailableTickets(remainingTickets, ticketNumber))
+	server := gin.Default()
+	server.POST("/userinfos", httppost.UserInfoPost)
+	server.Run(":80")
 
 	for {
 		// Force to user struct function.
