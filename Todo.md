@@ -13,6 +13,7 @@
         - [x] Making consume and insert qury from rabbitmq.
         - [ ] Make http server to api server. 
             - [ ] Bind http module to input user info func and integrate with rabbitmq .
+            - [ ] Make cuncurrency for http server.
         - [ ] Making pre-check for remaining ticket number throw rabbitmq. 
             - [ ] Make change in rabbitmq producer and consumer{1. seprate "message logic as input to func RabbitmqProducer and RabbitMQ Consumer."}
         - [ ] Making exchange and queue with code and bind queue with code to exchange.
