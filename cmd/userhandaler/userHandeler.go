@@ -6,18 +6,12 @@ import (
 	"strings"
 )
 
-var totalTicket int = 50
-var remainingTickets int = 50
-var booking = make([]map[string]string, 0)
-var confrenceName string = "Go-lang"
 var email string
 var ticketNumber int
 var firstName string
 var lastName string
 var slicess []string
-var allFirstName []string
 var names string
-var reservedTicket int
 
 type userData struct {
 	FirstName    string
@@ -39,16 +33,6 @@ func InputUserInfo() (string, string, string, int) {
 
 	return firstName, lastName, email, ticketNumber
 }
-
-func UserInputFromAPI(firstNameApi string, lastNameApi string, emailApi string, ticketNumberApi int) {
-	FirstName := firstNameApi
-	LastName := lastNameApi
-	Email := emailApi
-	TicketNumber := ticketNumberApi
-	UserHandelerStruct(FirstName, LastName, Email, TicketNumber)
-}
-
-// User Handeler Info Logic .
 
 func UserHandeler(firstName string, lastName string, email string, ticketNumber int) (string, string, string, string) {
 	// firstName, lastName, email, ticketNumber = InputUserInfo()

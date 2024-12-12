@@ -74,9 +74,6 @@ func UserInfoPost(body *gin.Context) {
 			// break
 		}
 	}
-
-	userhandaler.UserInputFromAPI(UserInfo.FirstName, UserInfo.LastName, UserInfo.Email, UserInfo.TicketNumber)
-
 }
 
 // func ServerRun() {
