@@ -26,5 +26,6 @@
 
 * Issues: 
     - [ ] Solve "Uncorrect showing cli comment #2".
-    - [ ] Fix remaining ticket number.
+    - [x] Fix remaining ticket number. "Uncorrect remaining ticket calculation #3"
+    - [x] Fix conusmer number with every time running  rabbitmqConsumer in UserInfoPost function. "Fix consumer number #3"
 

@@ -47,7 +47,7 @@ func UserInfoPost(body *gin.Context) {
 
 		// Produce test info to rabbitmq
 		rabbitmq.RabbitProducer(firstName, lastName, email, ticketNumber)
-		go rabbitmq.RabbitConsumer()
+		// go rabbitmq.RabbitConsumer()
 		//
 
 		notEnoughTickets := remainingTickets <= 0
