@@ -14,6 +14,8 @@
         - [ ] Make http server to api server. 
             - [x] Bind http module to input user info func and integrate with rabbitmq.
             - [ ] Make standard json reposnse in pose request. 
+            - [ ] Make function to gatther all static pages. 
+            - [ ] Make return after successful submit user's info.
         - [ ] Making pre-check for remaining ticket number throw rabbitmq. 
             - [ ] Make change in rabbitmq producer and consumer{1. seprate "message logic as input to func RabbitmqProducer and RabbitMQ Consumer."}
         - [ ] Making exchange and queue with code and bind queue with code to exchange.
