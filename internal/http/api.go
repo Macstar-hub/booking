@@ -63,15 +63,12 @@ func UserInfoPost(body *gin.Context) {
 		if !isNameValid {
 			fmt.Println("Please Enter Correct FirstName And LastName ... ")
 			fmt.Printf("FisrtName that enterd: %v And lastName that enterd: %v", firstName, lastName)
-			// break
 		}
 		if !isMailValid {
 			fmt.Println("Please Enter Correct Email Address ... ")
-			// break
 		}
 		if !isTicketNumberValid {
 			fmt.Printf("Please Select Ticket Number In Range Remaining Tickets: %v \n", remainingTickets)
-			// break
 		}
 	}
 }

@@ -18,5 +18,6 @@ func main() {
 	go rabbitmq.RabbitConsumer()
 	server := gin.Default()
 	server.POST("/userinfos", httppost.UserInfoPost)
+	server.StaticFile("/", "./web/submit/submit.html")
 	server.Run(":80")
 }

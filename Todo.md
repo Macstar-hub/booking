@@ -13,12 +13,13 @@
         - [x] Making consume and insert qury from rabbitmq.
         - [ ] Make http server to api server. 
             - [x] Bind http module to input user info func and integrate with rabbitmq.
-            - [ ] Make cuncurrency for http server.
+            - [ ] Make standard json reposnse in pose request. 
         - [ ] Making pre-check for remaining ticket number throw rabbitmq. 
             - [ ] Make change in rabbitmq producer and consumer{1. seprate "message logic as input to func RabbitmqProducer and RabbitMQ Consumer."}
         - [ ] Making exchange and queue with code and bind queue with code to exchange.
     - [x] Make userValidation Function and sperate them to cmd directory. 
     - [x] Cleanup main.go file. 
+    - [ ] Make sample ui.
     - [ ] Make build directory.
     - [ ] Make clean verbose messages.
     
