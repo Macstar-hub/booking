@@ -8,6 +8,7 @@ import (
 	"booking/cmd/uservalidation"
 	"booking/internal/rabbitmq"
 	"fmt"
+	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -71,6 +72,7 @@ func UserInfoPost(body *gin.Context) {
 			fmt.Printf("Please Select Ticket Number In Range Remaining Tickets: %v \n", remainingTickets)
 		}
 	}
+	body.Redirect(http.StatusFound, "/")
 }
 
 // func ServerRun() {
