@@ -19,5 +19,6 @@ func main() {
 	server := gin.Default()
 	server.POST("/userinfos", httppost.UserInfoPost)
 	server.StaticFile("/", "./web/submit/submit.html")
+	server.GET("/api/v1/getusers", httppost.BookedUsers)
 	server.Run(":80")
 }

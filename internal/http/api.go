@@ -6,6 +6,7 @@ import (
 	"booking/cmd/remainingtickets"
 	"booking/cmd/userhandaler"
 	"booking/cmd/uservalidation"
+	mysqlconnector "booking/internal/mysql"
 	"booking/internal/rabbitmq"
 	"fmt"
 	"net/http"
@@ -72,7 +73,19 @@ func UserInfoPost(body *gin.Context) {
 			fmt.Printf("Please Select Ticket Number In Range Remaining Tickets: %v \n", remainingTickets)
 		}
 	}
-	body.Redirect(http.StatusFound, "/")
+	body.Redirect(http.StatusFound, "/api/v1/getusers")
+}
+
+func BookedUsers(c *gin.Context) {
+	allUsersInfos := mysqlconnector.SelectQury()
+	fmt.Println("Debug from bookedusers: ", allUsersInfos.FirstName)
+	// mysqlconnector.SelectQury()
+	// roomid := c.Param("roomid")
+	// userid := fmt.Sprint(rand.Int31())
+	// c.HTML(http.StatusOK, "chat_room", gin.H{
+	// 	"roomid": roomid,
+	// 	"userid": userid,
+	// })
 }
 
 // func ServerRun() {

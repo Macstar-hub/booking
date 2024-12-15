@@ -72,10 +72,10 @@ func Insert(firstName string, lastName string, email string, ticketNumber int) {
 
 }
 
-func SelectQury() {
+func SelectQury() Tabelinfo {
 	db := MakeConnectionToDB()
 	selectQuery, err := db.Query("select * from users") // For example: db.Query("select * from users")
-
+	var usersTable Tabelinfo
 	if err != nil {
 		panic(err.Error())
 	}
@@ -83,13 +83,13 @@ func SelectQury() {
 	defer db.Close()
 
 	for selectQuery.Next() {
-		var tag Tabelinfo
 
-		err = selectQuery.Scan(&tag.FirstName, &tag.Lastname, &tag.Email, &tag.TicketNumber)
+		err = selectQuery.Scan(&usersTable.FirstName, &usersTable.Lastname, &usersTable.Email, &usersTable.TicketNumber)
 		if err != nil {
 			panic(err.Error())
 		}
-		fmt.Println("Value from database: ", tag.FirstName, tag.Lastname, tag.Email, tag.TicketNumber)
+		fmt.Println("Value from database: ", usersTable.FirstName, usersTable.Lastname, usersTable.Email, usersTable.TicketNumber)
 		defer db.Close()
 	}
+	return usersTable
 }
