@@ -1,0 +1,7 @@
+<html>
+	<h1>
+		{{ range .title }}
+			{{ . }}
+		{{ end }}
+	</h1>
+</html>

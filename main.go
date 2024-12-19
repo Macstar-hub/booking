@@ -17,6 +17,7 @@ func main() {
 	fmt.Printf("Welcome to %v confrence with available tickets: %v \n", confrenceName, remainingtickets.AvailableTickets(remainingTickets, ticketNumber))
 	go rabbitmq.RabbitConsumer()
 	server := gin.Default()
+	server.LoadHTMLGlob("./web/**/*")
 	server.POST("/userinfos", httppost.UserInfoPost)
 	server.StaticFile("/", "./web/submit/submit.html")
 	server.GET("/api/v1/getusers", httppost.BookedUsers)

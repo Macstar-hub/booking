@@ -28,6 +28,13 @@ type SqlConfig struct {
 	TableName    string
 }
 
+type UsersInfoTable struct {
+	Firstnames   []string
+	LastName     []string
+	Email        []string
+	TicketNumber []int
+}
+
 func MakeConnectionToDB() *sql.DB {
 	SqlConfig := SqlConfig{
 		Password:     "test@test",
@@ -72,24 +79,39 @@ func Insert(firstName string, lastName string, email string, ticketNumber int) {
 
 }
 
-func SelectQury() Tabelinfo {
+func SelectQury() UsersInfoTable {
+	var firstNameList []string
+	var lastNameList []string
+	var emailNameList []string
+	var ticketNumberList []int
+	// var usersInfosTable Tabelinfo
+	var usersTable Tabelinfo
+
 	db := MakeConnectionToDB()
 	selectQuery, err := db.Query("select * from users") // For example: db.Query("select * from users")
-	var usersTable Tabelinfo
 	if err != nil {
 		panic(err.Error())
 	}
-
 	defer db.Close()
 
 	for selectQuery.Next() {
-
 		err = selectQuery.Scan(&usersTable.FirstName, &usersTable.Lastname, &usersTable.Email, &usersTable.TicketNumber)
 		if err != nil {
 			panic(err.Error())
 		}
-		fmt.Println("Value from database: ", usersTable.FirstName, usersTable.Lastname, usersTable.Email, usersTable.TicketNumber)
+		// fmt.Println("Value from database: ", usersTable.FirstName, usersTable.Lastname, usersTable.Email, usersTable.TicketNumber)
+		firstNameList = append(firstNameList, usersTable.FirstName)
+		lastNameList = append(lastNameList, usersTable.Lastname)
+		emailNameList = append(emailNameList, usersTable.Email)
+		ticketNumberList = append(ticketNumberList, usersTable.TicketNumber)
 		defer db.Close()
 	}
-	return usersTable
+	UsersInfoTable := UsersInfoTable{
+		Firstnames:   firstNameList,
+		LastName:     lastNameList,
+		Email:        emailNameList,
+		TicketNumber: ticketNumberList,
+	}
+	fmt.Println("Len count is: ", len(UsersInfoTable.Firstnames))
+	return UsersInfoTable
 }

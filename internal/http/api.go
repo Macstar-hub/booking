@@ -76,31 +76,20 @@ func UserInfoPost(body *gin.Context) {
 	body.Redirect(http.StatusFound, "/api/v1/getusers")
 }
 
-func BookedUsers(c *gin.Context) {
+func BookedUsers(body *gin.Context) {
 	allUsersInfos := mysqlconnector.SelectQury()
-	fmt.Println("Debug from bookedusers: ", allUsersInfos.FirstName)
-	// mysqlconnector.SelectQury()
-	// roomid := c.Param("roomid")
-	// userid := fmt.Sprint(rand.Int31())
-	// c.HTML(http.StatusOK, "chat_room", gin.H{
-	// 	"roomid": roomid,
-	// 	"userid": userid,
-	// })
+	userListNumber := len(allUsersInfos.Firstnames)
+	var users []gin.H
+	for i := 0; i < userListNumber; i++ {
+		users = append(users, gin.H{
+			"Firstname":    allUsersInfos.Firstnames[i],
+			"LastName":     allUsersInfos.LastName[i],
+			"Email":        allUsersInfos.Email[i],
+			"TicketNumber": allUsersInfos.TicketNumber[i],
+		})
+	}
+	body.HTML(http.StatusOK, "adminArea.html", gin.H{
+		"Booking": users,
+	})
+	body.Redirect(http.StatusFound, "/")
 }
-
-// func ServerRun() {
-// 	server := gin.Default()
-// 	server.GET("/hello", func(test *gin.Context) {
-// 		test.String(http.StatusOK, "Hello world from string.")
-// 	})
-
-// 	server.POST("/userinfos", UserInfoPost)
-
-// 	server.GET("/", func(r *gin.Context) {
-// 		r.JSON(200, gin.H{
-// 			"message": "Hellow World",
-// 		})
-// 	})
-
-// 	server.Run(":80")
-// }
