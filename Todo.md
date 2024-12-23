@@ -16,7 +16,9 @@
             - [x] Make function to gatther all static pages. 
             - [x] Make return after successful submit user's info.
             - [ ] Make client authentication and authorization with keycloak.
-                - [ ] Make client and admin area with keycloak.
+                - [x] Make client and admin area with keycloak.
+                - [ ] Integrate keycloak with "/" path.
+                - [ ] Make access management with role defined in keycloak.
         - [ ] Making pre-check for remaining ticket number throw rabbitmq. 
             - [ ] Make change in rabbitmq producer and consumer{1. seprate "message logic as input to func RabbitmqProducer and RabbitMQ Consumer."}
         - [ ] Making exchange and queue with code and bind queue with code to exchange.

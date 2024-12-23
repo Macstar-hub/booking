@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	configURL := "http://localhost:8090/realms/admin-area"
+	configURL := "http://192.168.1.100:8090/realms/admin-area"
 	ctx := context.Background()
 	provider, err := oidc.NewProvider(ctx, configURL)
 	if err != nil {
@@ -23,7 +23,8 @@ func main() {
 	clientID := "admin-booking"
 	clientSecret := "LOmb3mUS4YiRWlT6s9be7Uk3NHdSGBYU"
 
-	redirectURL := "http://localhost:8091/booking/callback"
+	// redirectURL := "http://localhost:8091/booking/callback"
+	redirectURL := "http://192.168.100:80/"
 
 	ouath2Config := oauth2.Config{
 		ClientID:     clientID,
@@ -89,5 +90,5 @@ func main() {
 		}
 		w.Write(data)
 	})
-	log.Fatal(http.ListenAndServe("localhost:8091", nil))
+	log.Fatal(http.ListenAndServe("0.0.0.0:8091", nil))
 }
