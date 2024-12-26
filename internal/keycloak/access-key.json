@@ -1,0 +1,44 @@
+{
+  "exp": 1735170017,
+  "iat": 1735169717,
+  "auth_time": 1735167152,
+  "jti": "41c1912b-9c8e-49bf-904e-724cd631e264",
+  "iss": "http://192.168.1.100:8090/realms/admin-area",
+  "aud": "account",
+  "sub": "312d03d5-987e-4f27-baae-4dba1c2126f2",
+  "typ": "Bearer",
+  "azp": "admin-booking",
+  "sid": "65e0600b-22ab-424a-a6be-24697037aab9",
+  "acr": "0",
+  "allowed-origins": [
+    "\"*\""
+  ],
+  "realm_access": {
+    "roles": [
+      "offline_access",
+      "default-roles-admin-area",
+      "uma_authorization"
+    ]
+  },
+  "resource_access": {
+    "admin-booking": {
+      "roles": [
+        "booking-admin-new"
+      ]
+    },
+    "account": {
+      "roles": [
+        "manage-account",
+        "manage-account-links",
+        "view-profile"
+      ]
+    }
+  },
+  "scope": "openid email profile",
+  "email_verified": true,
+  "name": "mehrdad moradi",
+  "preferred_username": "mehrdad",
+  "given_name": "mehrdad",
+  "family_name": "moradi",
+  "email": "mehrdad@mac.com"
+}

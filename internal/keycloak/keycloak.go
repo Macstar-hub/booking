@@ -9,8 +9,15 @@ import (
 	"strings"
 
 	oidc "github.com/coreos/go-oidc"
+	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/oauth2"
 )
+
+type UserClaims struct {
+	jwt.RegisteredClaims
+	name string `json:"name"`
+	// account []string
+}
 
 func main() {
 	configURL := "http://192.168.1.100:8090/realms/admin-area"
@@ -23,15 +30,15 @@ func main() {
 	clientID := "admin-booking"
 	clientSecret := "LOmb3mUS4YiRWlT6s9be7Uk3NHdSGBYU"
 
-	// redirectURL := "http://localhost:8091/booking/callback"
-	redirectURL := "http://192.168.100:80/"
+	redirectURL := "http://localhost:8091/booking/callback"
+	// redirectURL := "http://192.168.1.100"
 
 	ouath2Config := oauth2.Config{
 		ClientID:     clientID,
 		ClientSecret: clientSecret,
 		RedirectURL:  redirectURL,
 		Endpoint:     provider.Endpoint(),
-		Scopes:       []string{oidc.ScopeOpenID, "profile", "email"},
+		Scopes:       []string{oidc.ScopeOpenID, "profile", "email", "roles"},
 	}
 
 	state := "someState"
@@ -75,6 +82,34 @@ func main() {
 		if err != nil {
 			fmt.Println("Cannot verify token: ", err)
 		}
+
+		//  How to make user data retrive from token for example email and role.
+
+		var claims struct {
+			OAuth2Token   *oauth2.Token
+			Email         string `json:"email"`
+			EmailVerified bool   `json:"email_verified"`
+			FamilyName    string `json:"family_name"`
+			RealmAccess   struct {
+				Roles []string `json:"roles"`
+			} `json:"realm_access"`
+			ResourceAccess map[string]struct {
+				Roles []string `json:"roles"`
+			} `json:"resource_access"`
+		}
+
+		if err := idToken.Claims(&claims); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		userInfos, err := json.MarshalIndent(claims, "", "    ")
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		w.Write(userInfos)
+
+		// End of user data retrive from token for example email and role.
 
 		resp := struct {
 			OAuth2Token   *oauth2.Token
