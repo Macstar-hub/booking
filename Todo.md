@@ -17,8 +17,8 @@
             - [x] Make return after successful submit user's info.
             - [ ] Make client authentication and authorization with keycloak.
                 - [x] Make client and admin area with keycloak.
-                - [ ] Integrate keycloak with "/" path.
-                - [ ] Make access management with role defined in keycloak.
+                - [x] Integrate keycloak with "/" path.
+                - [ ] Make access management to "Admin area" with role defined in keycloak.
         - [ ] Making pre-check for remaining ticket number throw rabbitmq. 
             - [ ] Make change in rabbitmq producer and consumer{1. seprate "message logic as input to func RabbitmqProducer and RabbitMQ Consumer."}
         - [ ] Making exchange and queue with code and bind queue with code to exchange.
@@ -35,5 +35,5 @@
     - [x] Fix remaining ticket number. "Uncorrect remaining ticket calculation #3"
     - [x] Fix conusmer number with every time running  rabbitmqConsumer in UserInfoPost function. "Fix consumer number #3"
     - [x] Fix ticketNumber validation condition to stop producing user info's after booked out all ticket. 
-    - [ ] Fix user info realm_access scope within keycloak module .
+    - [x] Fix user info realm_access scope within keycloak module .
 
