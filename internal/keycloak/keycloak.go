@@ -2,21 +2,81 @@ package main
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	oidc "github.com/coreos/go-oidc"
-	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/oauth2"
 )
 
-type UserClaims struct {
-	jwt.RegisteredClaims
-	name string `json:"name"`
-	// account []string
+type ResourceAccess struct {
+	Account Account `json:"account"`
+}
+
+type Account struct {
+	Roles []string `json:"roles"`
+}
+
+type RealmAccess struct {
+	Roles []string `json:"roles"`
+}
+
+type userEmail struct {
+	Email          string         `json:"email"`
+	EXP            int            `json:"exp"`
+	AuthTime       int            `json:"auth_time"`
+	AllowedOrigins []string       `json:"allowed-origins"`
+	RealmAccess    RealmAccess    `json:"realm_access"`
+	ResourceAccess ResourceAccess `json:"resource_access"`
+}
+
+func jsonLoad(jsonFileName string, jsonToken string) {
+	jsonFile, err := os.Open(jsonFileName)
+	if err != nil {
+		fmt.Println("Cannot open json file with error: ", err)
+	}
+	defer jsonFile.Close()
+
+	byteJsonFile, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		fmt.Println("Cannot make byte from json file with error: ", err)
+	}
+	fmt.Println(byteJsonFile)
+
+	var users userEmail
+	err = json.Unmarshal([]byte(jsonToken), &users)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println(users.RealmAccess.Roles)
+	fmt.Println(users.ResourceAccess.Account.Roles)
+}
+
+func decodeAccessToken(token string) []byte {
+	part := strings.Split(token, ".")
+	payload, err := base64.RawURLEncoding.DecodeString(part[1])
+	if err != nil {
+		log.Println("Cannot decode Access token with error: ", err)
+	}
+
+	var claims map[string]interface{}
+	if err := json.Unmarshal(payload, &claims); err != nil {
+		fmt.Println("Failed to parse payload as JSON:", err)
+	}
+
+	// Print the decoded claims
+	fmt.Println("Decoded Access Token Claims:")
+	jsonClaims, _ := json.MarshalIndent(claims, "", "    ")
+	fmt.Println(string(jsonClaims))
+	jsonLoad("sample.json", string(jsonClaims))
+	return jsonClaims
 }
 
 func main() {
@@ -84,30 +144,26 @@ func main() {
 		}
 
 		//  How to make user data retrive from token for example email and role.
-
-		var claims struct {
-			OAuth2Token   *oauth2.Token
-			Email         string `json:"email"`
-			EmailVerified bool   `json:"email_verified"`
-			FamilyName    string `json:"family_name"`
-			RealmAccess   struct {
-				Roles []string `json:"roles"`
-			} `json:"realm_access"`
-			ResourceAccess map[string]struct {
-				Roles []string `json:"roles"`
-			} `json:"resource_access"`
-		}
+		var claims userEmail
 
 		if err := idToken.Claims(&claims); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
+
+		// fmt.Println("Realm Access Roles:", claims.RealmAccess.Roles)
+		// for _, role := range claims.RealmAccess.Roles {
+		// 	fmt.Println("Role:", role)
+		// }
 
 		userInfos, err := json.MarshalIndent(claims, "", "    ")
 
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
+		// fmt.Println("Access token: ", oauth2Token.AccessToken)
+		jsonAccessToken := decodeAccessToken(oauth2Token.AccessToken)
 		w.Write(userInfos)
+		w.Write(jsonAccessToken)
 
 		// End of user data retrive from token for example email and role.
 

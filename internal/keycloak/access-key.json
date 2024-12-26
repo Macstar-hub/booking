@@ -15,6 +15,7 @@
   ],
   "realm_access": {
     "roles": [
+      "Mamad",
       "offline_access",
       "default-roles-admin-area",
       "uma_authorization"
@@ -40,5 +41,5 @@
   "preferred_username": "mehrdad",
   "given_name": "mehrdad",
   "family_name": "moradi",
-  "email": "mehrdad@mac.com"
+  "email": "mehrdad@mac2222.com"
 }
