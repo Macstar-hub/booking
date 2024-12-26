@@ -26,6 +26,7 @@ type userInfoTemplate struct {
 var remainingTickets int = 50
 
 func UserInfoPost(body *gin.Context) {
+
 	firstName := body.PostForm("firstnames")
 	lastName := body.PostForm("lastnames")
 	email := body.PostForm("emails")
@@ -77,6 +78,13 @@ func UserInfoPost(body *gin.Context) {
 }
 
 func BookedUsers(body *gin.Context) {
+	// Authentication Section
+	state := "someState"
+	if body.Request.URL.Query().Get("state") != state {
+		body.Redirect(308, "http://192.168.1.100:8091/?uri=/api/v1/getusers")
+	}
+	// End Of authentication section.
+
 	allUsersInfos := mysqlconnector.SelectQury()
 	userListNumber := len(allUsersInfos.Firstnames)
 	var users []gin.H

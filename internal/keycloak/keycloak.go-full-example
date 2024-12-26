@@ -91,7 +91,8 @@ func main() {
 	clientID := "admin-booking"
 	clientSecret := "LOmb3mUS4YiRWlT6s9be7Uk3NHdSGBYU"
 
-	redirectURL := "http://192.168.1.100:80/api/v1/getusers"
+	redirectURL := "http://localhost:8091/booking/callback"
+	// redirectURL := "http://192.168.1.100"
 
 	ouath2Config := oauth2.Config{
 		ClientID:     clientID,
@@ -110,27 +111,6 @@ func main() {
 	verifier := provider.Verifier(oidcConfig)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-
-		uriForwarded := r.URL.Query().Get("uri")
-		redirectURL := "http://192.168.1.100" + uriForwarded
-		fmt.Println(redirectURL)
-
-		ouath2Config := oauth2.Config{
-			ClientID:     clientID,
-			ClientSecret: clientSecret,
-			RedirectURL:  redirectURL,
-			Endpoint:     provider.Endpoint(),
-			Scopes:       []string{oidc.ScopeOpenID, "profile", "email", "roles"},
-		}
-
-		fmt.Println("Debug URI forwarded: ", uriForwarded)
-
-		// Get all headers
-		// for k, v := range r.Header {
-		// 	fmt.Printf("%v: %v\n", k, v)
-		// }
-		//
-
 		rawAccessToken := r.Header.Get("Authorization")
 		if rawAccessToken == "" {
 			http.Redirect(w, r, ouath2Config.AuthCodeURL(state), http.StatusFound)
@@ -164,7 +144,24 @@ func main() {
 			fmt.Println("Cannot verify token: ", err)
 		}
 
-		// decodeAccessToken(oauth2Token.AccessToken)
+		//  How to make user data retrive from token for example email and role.
+		var claims userEmail
+
+		if err := idToken.Claims(&claims); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		userInfos, err := json.MarshalIndent(claims, "", "    ")
+
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		// fmt.Println("Access token: ", oauth2Token.AccessToken)
+		jsonAccessToken := decodeAccessToken(oauth2Token.AccessToken)
+		w.Write(userInfos)
+		w.Write(jsonAccessToken)
+
+		// End of user data retrive from token for example email and role.
 
 		resp := struct {
 			OAuth2Token   *oauth2.Token
