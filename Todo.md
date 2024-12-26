@@ -35,4 +35,5 @@
     - [x] Fix remaining ticket number. "Uncorrect remaining ticket calculation #3"
     - [x] Fix conusmer number with every time running  rabbitmqConsumer in UserInfoPost function. "Fix consumer number #3"
     - [x] Fix ticketNumber validation condition to stop producing user info's after booked out all ticket. 
+    - [ ] Fix user info realm_access scope within keycloak module .
 
