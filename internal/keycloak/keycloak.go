@@ -41,6 +41,7 @@ func jsonLoad(jsonFileName string, jsonToken string) {
 	if err != nil {
 		fmt.Println("Cannot open json file with error: ", err)
 	}
+
 	defer jsonFile.Close()
 
 	byteJsonFile, err := ioutil.ReadAll(jsonFile)
